@@ -26,7 +26,7 @@ A full-stack Hospital Management System built using **Django (backend)** with a 
 - Appointment date & time tracking
 - Structured scheduling system
 - Easy slot management
-- Ready for Google Calendar integration (future upgrade)
+-  Google Calendar integration 
 
 ---
 
