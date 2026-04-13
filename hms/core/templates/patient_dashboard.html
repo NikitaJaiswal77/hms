@@ -5,7 +5,15 @@
 <h2>Patient Dashboard</h2>
 
 <h3>Available Slots</h3>
-
+{% if is_google_connected %}
+<p style="color: green;">Google Calendar connected</p>
+{% else %}
+<p style="color: #b36b00;">Google Calendar not connected. Connect first to auto-create events.</p>
+<a href="/google/connect/" class="btn">Connect Google Calendar</a>
+{% endif %}
+<a href="/logout/" class="btn btn-danger">
+    Logout
+</a>
 {% for slot in slots %}
 <div class="card">
     <b>Dr. {{ slot.doctor.username }}</b><br>

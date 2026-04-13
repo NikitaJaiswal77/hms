@@ -10,4 +10,6 @@ urlpatterns = [
     path('add-slot/', views.add_slot, name='add_slot'),
     path('book-slot/<int:slot_id>/', views.book_slot, name='book_slot'),
     path('edit-slot/<int:slot_id>/', views.edit_slot, name='edit_slot'),
+    path('google/connect/', views.google_connect, name='google_connect'),
+    path('google/callback/', views.google_callback, name='google_callback'),
 ]

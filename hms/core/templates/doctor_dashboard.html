@@ -5,7 +5,15 @@
 <h2>Doctor Dashboard</h2>
 
 <a href="/add-slot/" class="btn">Add Slot</a>
-
+{% if is_google_connected %}
+<p style="color: green;">Google Calendar connected</p>
+{% else %}
+<p style="color: #b36b00;">Google Calendar not connected. Connect first to auto-create events.</p>
+<a href="/google/connect/" class="btn">Connect Google Calendar</a>
+{% endif %}
+<a href="/logout/" class="btn btn-danger">
+    Logout
+</a>
 <h3>Your Slots</h3>
 
 {% for slot in slots %}
@@ -21,7 +29,9 @@
         <a href="/edit-slot/{{ slot.id }}/" class="btn">Edit</a>
     {% endif %}
 </div>
+
 {% endfor %}
+
 
 <h3>Bookings</h3>
 

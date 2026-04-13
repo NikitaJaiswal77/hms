@@ -6,7 +6,18 @@ class User(AbstractUser):
         ('doctor', 'Doctor'),
         ('patient', 'Patient'),
     )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        null=True,
+        blank=True
+    )
+
+    google_token = models.TextField(null=True, blank=True)
+    refresh_token = models.TextField(null=True, blank=True)
+    token_uri = models.TextField(null=True, blank=True)
+    client_id = models.TextField(null=True, blank=True)
+    client_secret = models.TextField(null=True, blank=True)
 
 class Availability(models.Model):
     doctor = models.ForeignKey(User, on_delete=models.CASCADE)
