@@ -1,29 +1,82 @@
-# Hospital Management System (Django + Email Service)
+#  Hospital Management System (Django + Serverless Email + Calendar Integration)
 
-A  Hospital Management System built using **Django (backend)** and **Serverless Email Service (Python SMTP)**.
+A full-stack Hospital Management System built using **Django (backend)** with a **Serverless Email Service (SMTP Gmail)** and **Calendar Integration** for managing appointments efficiently.
 
 ---
 
 ##  Features
 
-###  Doctor Module
-- Add availability slots
-- View bookings
-- Manage appointments
+### Doctor Features
+- Create availability slots 
+- View booked appointments
+- Manage schedule
 
-### Patient Module
+### Patient Features
 - View available slots
 - Book appointments
-- Get confirmation emails
+- Receive booking confirmation email
 
-###  Email Service
+###  Email System
 - Signup welcome email
 - Booking confirmation email
-- SMTP (Gmail) integration
-- Serverless Python function
+- Gmail SMTP integration
+- Serverless Python email API
+
+###  Calendar Integration 
+- Appointment date & time tracking
+- Structured scheduling system
+- Easy slot management
+- Ready for Google Calendar integration (future upgrade)
 
 ---
 
 ##  Project Structure
-hms/                → Django backend (main app)
-email_service/      → Serverless email API (SMTP handler)
+hms/ → Django backend
+email_service/ → Serverless email API
+
+---
+
+##  Tech Stack
+
+- Python 
+- Django 
+- PostgreSQL  
+- SMTP (Gmail Email Service)
+- Serverless Python Function
+- HTML, CSS
+- Calendar Scheduling 
+
+---
+
+##  Email Types
+
+| Type | Description |
+|------|------------|
+| SIGNUP_WELCOME | Sent after user registration |
+| BOOKING_CONFIRMATION | Sent after successful booking |
+
+---
+
+##  Appointment Flow
+
+1. Doctor creates slots
+2. Patient selects slot
+3. Booking is saved
+4. Email confirmation sent
+5. Appointment tracked via calendar system
+
+---
+
+##  API Endpoint
+
+### Send Email
+POST /dev/send-email
+
+
+### Request Body
+
+```json
+{
+  "type": "SIGNUP_WELCOME",
+  "email": "user@gmail.com"
+}
