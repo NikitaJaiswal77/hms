@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add Slot</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="card">
+        Date:<br>
+        <input type="date" name="date"><br><br>
+
+        Start Time:<br>
+        <input type="time" name="start"><br><br>
+
+        End Time:<br>
+        <input type="time" name="end"><br><br>
+
+        <button type="submit" class="btn">Add Slot</button>
+    </div>
+</form>
+
+{% endblock %}

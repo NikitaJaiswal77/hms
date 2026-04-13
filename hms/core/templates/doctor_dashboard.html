@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Doctor Dashboard</h2>
+
+<a href="/add-slot/" class="btn">Add Slot</a>
+
+<h3>Your Slots</h3>
+
+{% for slot in slots %}
+<div class="card">
+    <b>{{ slot.date }}</b><br>
+    {{ slot.start_time }} - {{ slot.end_time }}<br>
+    Status: 
+    {% if slot.is_booked %}
+        <span style="color:red;">Booked</span>
+    {% else %}
+        <span style="color:green;">Available</span>
+         <br><br>
+        <a href="/edit-slot/{{ slot.id }}/" class="btn">Edit</a>
+    {% endif %}
+</div>
+{% endfor %}
+
+<h3>Bookings</h3>
+
+{% for b in bookings %}
+<div class="card">
+    Patient: {{ b.patient.username }}<br>
+    Date: {{ b.slot.date }}<br>
+    Time: {{ b.slot.start_time }}
+</div>
+{% endfor %}
+
+{% endblock %}

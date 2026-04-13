@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Edit Slot</h2>
+
+<div class="card" style="max-width:400px; margin:auto;">
+
+<form method="POST">
+    {% csrf_token %}
+
+    Date:<br>
+    <input type="date" name="date" value="{{ slot.date }}"><br><br>
+
+    Start Time:<br>
+    <input type="time" name="start" value="{{ slot.start_time }}"><br><br>
+
+    End Time:<br>
+    <input type="time" name="end" value="{{ slot.end_time }}"><br><br>
+
+    <button type="submit" class="btn">Update Slot</button>
+</form>
+
+</div>
+
+{% endblock %}

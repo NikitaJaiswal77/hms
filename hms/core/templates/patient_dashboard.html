@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Patient Dashboard</h2>
+
+<h3>Available Slots</h3>
+
+{% for slot in slots %}
+<div class="card">
+    <b>Dr. {{ slot.doctor.username }}</b><br>
+    {{ slot.date }}<br>
+    {{ slot.start_time }} - {{ slot.end_time }}<br><br>
+
+    <a href="/book-slot/{{ slot.id }}/" class="btn">Book</a>
+</div>
+{% endfor %}
+
+{% endblock %}

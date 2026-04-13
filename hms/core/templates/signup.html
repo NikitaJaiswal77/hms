@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="text-align:center;">Signup</h2>
+
+<div class="card" style="max-width:400px; margin:auto;">
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <label>Username</label><br>
+    <input type="text" name="username" class="input"><br><br>
+
+    <label>Email</label><br>
+    <input type="email" name="email" class="input"><br><br>
+
+    <label>Password</label><br>
+    <input type="password" name="password" class="input"><br><br>
+
+    <label>Role</label><br>
+    <select name="role" class="input">
+        <option value="doctor">Doctor</option>
+        <option value="patient">Patient</option>
+    </select><br><br>
+
+    <button type="submit" class="btn" style="width:100%;">Signup</button>
+</form>
+
+<br>
+<p style="text-align:center;">
+    Already have account? <a href="/login/">Login</a>
+</p>
+
+</div>
+
+{% endblock %}
