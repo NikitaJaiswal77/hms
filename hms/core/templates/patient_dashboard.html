@@ -2,26 +2,66 @@
 
 {% block content %}
 
-<h2>Patient Dashboard</h2>
+<div class="grid grid-2">
+    <div>
+        <div class="page-title">Patient Dashboard</div>
+        <p class="page-subtitle">Browse available slots and book instantly.</p>
 
-<h3>Available Slots</h3>
-{% if is_google_connected %}
-<p style="color: green;">Google Calendar connected</p>
-{% else %}
-<p style="color: #b36b00;">Google Calendar not connected. Connect first to auto-create events.</p>
-<a href="/google/connect/" class="btn">Connect Google Calendar</a>
-{% endif %}
-<a href="/logout/" class="btn btn-danger">
-    Logout
-</a>
-{% for slot in slots %}
-<div class="card">
-    <b>Dr. {{ slot.doctor.username }}</b><br>
-    {{ slot.date }}<br>
-    {{ slot.start_time }} - {{ slot.end_time }}<br><br>
+        <div class="card">
+            <div class="slot-title">
+                <b>Available Slots</b>
+                {% if is_google_connected %}
+                    <span class="badge badge-success">Calendar connected</span>
+                {% else %}
+                    <span class="badge badge-warn">Calendar not connected</span>
+                {% endif %}
+            </div>
 
-    <a href="/book-slot/{{ slot.id }}/" class="btn">Book</a>
+            {% if not is_google_connected %}
+                <p class="muted" style="margin: 10px 0 0;">
+                    Connect Google Calendar to auto-create events after booking.
+                </p>
+                <div style="margin-top: 12px;">
+                    <a href="/google/connect/" class="btn btn-primary">Connect Google Calendar</a>
+                </div>
+                <div class="divider"></div>
+            {% else %}
+                <p class="muted" style="margin: 10px 0 0;">
+                    Events will be created automatically for new bookings.
+                </p>
+                <div class="divider"></div>
+            {% endif %}
+
+            <div class="list">
+                {% for slot in slots %}
+                    <div class="card" style="box-shadow:none;">
+                        <div class="slot-title">
+                            <b>Dr. {{ slot.doctor.username }}</b>
+                            <a href="/book-slot/{{ slot.id }}/" class="btn btn-primary">Book</a>
+                        </div>
+                        <div class="slot-meta">
+                            <span>📅 {{ slot.date }}</span>
+                            <span>⏱️ {{ slot.start_time }} - {{ slot.end_time }}</span>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="muted" style="margin:0;">No slots available right now.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="card">
+            <div class="slot-title">
+                <b>Account</b>
+                <a href="/logout/" class="btn btn-danger">Logout</a>
+            </div>
+            <p class="muted" style="margin: 10px 0 0;">
+                Tip: If events are not appearing, reconnect Google Calendar and try booking again.
+            </p>
+        </div>
+    </div>
 </div>
-{% endfor %}
 
 {% endblock %}

@@ -2,45 +2,94 @@
 
 {% block content %}
 
-<h2>Doctor Dashboard</h2>
+<div class="grid grid-2">
+    <div>
+        <div class="page-title">Doctor Dashboard</div>
+        <p class="page-subtitle">Manage your availability and see bookings.</p>
 
-<a href="/add-slot/" class="btn">Add Slot</a>
-{% if is_google_connected %}
-<p style="color: green;">Google Calendar connected</p>
-{% else %}
-<p style="color: #b36b00;">Google Calendar not connected. Connect first to auto-create events.</p>
-<a href="/google/connect/" class="btn">Connect Google Calendar</a>
-{% endif %}
-<a href="/logout/" class="btn btn-danger">
-    Logout
-</a>
-<h3>Your Slots</h3>
+        <div class="card">
+            <div class="slot-title">
+                <b>Quick Actions</b>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <a href="/add-slot/" class="btn btn-primary">Add Slot</a>
+                    <a href="/logout/" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
 
-{% for slot in slots %}
-<div class="card">
-    <b>{{ slot.date }}</b><br>
-    {{ slot.start_time }} - {{ slot.end_time }}<br>
-    Status: 
-    {% if slot.is_booked %}
-        <span style="color:red;">Booked</span>
-    {% else %}
-        <span style="color:green;">Available</span>
-         <br><br>
-        <a href="/edit-slot/{{ slot.id }}/" class="btn">Edit</a>
-    {% endif %}
+            <div style="margin-top: 12px;">
+                {% if is_google_connected %}
+                    <span class="badge badge-success">Calendar connected</span>
+                {% else %}
+                    <span class="badge badge-warn">Calendar not connected</span>
+                    <div style="margin-top: 10px;">
+                        <a href="/google/connect/" class="btn btn-primary">Connect Google Calendar</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="card">
+            <div class="slot-title">
+                <b>Your Slots</b>
+                <span class="muted">Edit only available slots</span>
+            </div>
+
+            <div class="list" style="margin-top: 12px;">
+                {% for slot in slots %}
+                    <div class="card" style="box-shadow:none;">
+                        <div class="slot-title">
+                            <b>{{ slot.date }}</b>
+                            {% if slot.is_booked %}
+                                <span class="badge">Booked</span>
+                            {% else %}
+                                <span class="badge badge-success">Available</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="slot-meta">
+                            <span>⏱️ {{ slot.start_time }} - {{ slot.end_time }}</span>
+                        </div>
+
+                        {% if not slot.is_booked %}
+                            <div style="margin-top: 12px;">
+                                <a href="/edit-slot/{{ slot.id }}/" class="btn btn-ghost">Edit</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p class="muted" style="margin:0;">No slots yet. Add your availability to start receiving bookings.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="card">
+            <div class="slot-title">
+                <b>Recent Bookings</b>
+                <span class="muted">{{ bookings|length }} total</span>
+            </div>
+
+            <div class="list" style="margin-top: 12px;">
+                {% for b in bookings %}
+                    <div class="card" style="box-shadow:none;">
+                        <div class="slot-title">
+                            <b>{{ b.patient.username }}</b>
+                            <span class="badge">Booked</span>
+                        </div>
+                        <div class="slot-meta">
+                            <span>📅 {{ b.slot.date }}</span>
+                            <span>⏱️ {{ b.slot.start_time }}</span>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="muted" style="margin:0;">No bookings yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
-
-{% endfor %}
-
-
-<h3>Bookings</h3>
-
-{% for b in bookings %}
-<div class="card">
-    Patient: {{ b.patient.username }}<br>
-    Date: {{ b.slot.date }}<br>
-    Time: {{ b.slot.start_time }}
-</div>
-{% endfor %}
 
 {% endblock %}

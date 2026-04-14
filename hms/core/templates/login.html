@@ -2,27 +2,34 @@
 
 {% block content %}
 
-<h2 style="text-align:center;">Login</h2>
+<div class="grid" style="place-items:center; min-height: calc(100vh - 170px);">
+    <div class="card" style="max-width: 460px; width: 100%;">
+        <div class="page-title" style="text-align:center;">Welcome back</div>
+        <p class="page-subtitle" style="text-align:center;">Login to manage appointments and calendar.</p>
 
-<div class="card" style="max-width:400px; margin:auto;">
+        <form method="POST">
+            {% csrf_token %}
 
-<form method="POST">
-    {% csrf_token %}
+            <div class="form-row">
+                <label>Username</label>
+                <input type="text" name="username" class="input" placeholder="Enter your username" required>
+            </div>
 
-    <label>Username</label><br>
-    <input type="text" name="username" class="input"><br><br>
+            <div class="form-row">
+                <label>Password</label>
+                <input type="password" name="password" class="input" placeholder="Enter your password" required>
+            </div>
 
-    <label>Password</label><br>
-    <input type="password" name="password" class="input"><br><br>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" style="width:100%;">Login</button>
+            </div>
+        </form>
 
-    <button type="submit" class="btn" style="width:100%;">Login</button>
-</form>
-
-<br>
-<p style="text-align:center;">
-    Don't have account? <a href="/signup/">Signup</a>
-</p>
-
+        <div class="divider"></div>
+        <p class="muted" style="text-align:center; margin:0;">
+            Don’t have an account? <a href="/signup/" style="text-decoration: underline;">Create one</a>
+        </p>
+    </div>
 </div>
 
 {% endblock %}
