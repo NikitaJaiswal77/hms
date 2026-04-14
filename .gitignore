@@ -5,13 +5,13 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Env
+# Environment files
 .env
+*.env
 
+# Secrets
 hms/client_secret.json
-d 
+
 # Database
 db.sqlite3
-
-__pycache__/
-*.pyc
+*.sqlite3
