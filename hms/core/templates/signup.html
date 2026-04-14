@@ -2,36 +2,47 @@
 
 {% block content %}
 
-<h2 style="text-align:center;">Signup</h2>
+<div class="grid" style="place-items:center; min-height: calc(100vh - 170px);">
+    <div class="card" style="max-width: 520px; width: 100%;">
+        <div class="page-title" style="text-align:center;">Create your account</div>
+        <p class="page-subtitle" style="text-align:center;">Choose your role and start booking.</p>
 
-<div class="card" style="max-width:400px; margin:auto;">
+        <form method="POST">
+            {% csrf_token %}
 
-<form method="POST">
-    {% csrf_token %}
-    
-    <label>Username</label><br>
-    <input type="text" name="username" class="input"><br><br>
+            <div class="form-row">
+                <label>Username</label>
+                <input type="text" name="username" class="input" placeholder="e.g. nikita" required>
+            </div>
 
-    <label>Email</label><br>
-    <input type="email" name="email" class="input"><br><br>
+            <div class="form-row">
+                <label>Email</label>
+                <input type="email" name="email" class="input" placeholder="you@example.com" required>
+            </div>
 
-    <label>Password</label><br>
-    <input type="password" name="password" class="input"><br><br>
+            <div class="form-row">
+                <label>Password</label>
+                <input type="password" name="password" class="input" placeholder="Create a strong password" required>
+            </div>
 
-    <label>Role</label><br>
-    <select name="role" class="input">
-        <option value="doctor">Doctor</option>
-        <option value="patient">Patient</option>
-    </select><br><br>
+            <div class="form-row">
+                <label>Role</label>
+                <select name="role" class="input" required>
+                    <option value="doctor">Doctor</option>
+                    <option value="patient">Patient</option>
+                </select>
+            </div>
 
-    <button type="submit" class="btn" style="width:100%;">Signup</button>
-</form>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" style="width:100%;">Signup</button>
+            </div>
+        </form>
 
-<br>
-<p style="text-align:center;">
-    Already have account? <a href="/login/">Login</a>
-</p>
-
+        <div class="divider"></div>
+        <p class="muted" style="text-align:center; margin:0;">
+            Already have an account? <a href="/login/" style="text-decoration: underline;">Login</a>
+        </p>
+    </div>
 </div>
 
 {% endblock %}
