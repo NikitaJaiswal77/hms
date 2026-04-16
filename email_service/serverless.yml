@@ -3,7 +3,7 @@ service: email-service
 provider:
   name: aws
   runtime: python3.9
-  timeout: 30   # 👈 ADD THIS
+  timeout: 30 
 
 functions:
   sendEmail:
